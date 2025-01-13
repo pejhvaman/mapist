@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import HomePage from "./pages/HomePage";
@@ -7,9 +8,9 @@ import Login from "./pages/Login";
 import AppLayout from "./pages/AppLayout";
 import PageNotFound from "./pages/PageNotFound";
 import CityList from "./components/CityList";
-import { useEffect, useState } from "react";
+import CountryList from "./components/CountryList";
 
-// const BASE_URL = "http://localhost:9000";
+const BASE_URL = "http://localhost:5000";
 
 function App() {
   const [cities, setCities] = useState([]);
@@ -19,7 +20,7 @@ function App() {
     async function fetchCities() {
       try {
         setIsLoading(true);
-        const res = await fetch("http://localhost:5000/cities");
+        const res = await fetch(`${BASE_URL}/cities`);
         if (!res.ok) throw new Error("something went wrong😡");
         const data = await res.json();
         setCities(data);
@@ -48,7 +49,10 @@ function App() {
             path="cities"
             element={<CityList cities={cities} isLoading={isLoading} />}
           />
-          <Route path="countries" element={<p>countries</p>} />
+          <Route
+            path="countries"
+            element={<CountryList cities={cities} isLoading={isLoading} />}
+          />
           <Route path="form" element={<p>form</p>} />
         </Route>
         <Route path="*" element={<PageNotFound />} />
