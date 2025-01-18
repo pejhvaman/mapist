@@ -3,7 +3,6 @@
   max-height: 70%;
   background-color: var(--color-dark--2);
   border-radius: 7px;
-  overflow: scroll;
 
   width: 100%;
   display: flex;
@@ -32,16 +31,16 @@
 }
 
 .city h3 span {
-  font-size: 3.2rem;
+  font-size: 2rem;
   line-height: 1;
 }
 
 .city p {
-  font-size: 1.6rem;
+  font-size: 1.2rem;
 }
 
 .city a:link,
 .city a:visited {
-  font-size: 1.6rem;
+  font-size: 1rem;
   color: var(--color-brand--1);
 }
