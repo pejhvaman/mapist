@@ -33,7 +33,7 @@ function CitiesProvider({ children }) {
       const res = await fetch(`${BASE_URL}/cities/${cityId}`);
       if (!res.ok) throw new Error("something went wrong😡");
       const data = await res.json();
-      console.log(data);
+      // console.log(data);
       setCurrentCity(data);
     } catch (err) {
       console.error(err.message);
