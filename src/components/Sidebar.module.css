@@ -7,3 +7,9 @@
   align-items: center;
   height: calc(100vh - 4.8rem);
 }
+
+@media (max-width: 768px) {
+  .sidebar {
+    height: 100vh;
+  }
+}
