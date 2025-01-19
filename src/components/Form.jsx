@@ -1,3 +1,6 @@
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
 import { useEffect, useState } from "react";
 
 import styles from "./Form.module.css";
@@ -32,6 +35,7 @@ function Form() {
 
   useEffect(() => {
     async function fetchCityData() {
+      if (!lat && !lng) return;
       try {
         setIsLoadingGeocoding(true);
         setGeocodingError("");
@@ -39,7 +43,7 @@ function Form() {
         const res = await fetch(`${BASE_URL}?latitude=${lat}&longitude=${lng}`);
         if (!res.ok) return;
         const data = await res.json();
-        console.log(data);
+        // console.log(data);
 
         if (!data.city || !data.countryName)
           throw new Error("Click on a location that is inside a border😉");
@@ -58,6 +62,9 @@ function Form() {
   }, [lat, lng]);
 
   if (isLoadingGeocoding) return <Spinner />;
+
+  if (!lat && !lng)
+    return <Message message="Stat by clicking somewhere on the map." />;
 
   if (geocodingError) return <Message message={geocodingError} />;
 
@@ -84,10 +91,16 @@ function Form() {
 
       <div className={styles.row}>
         <label htmlFor="date">When did you go to {cityName}?</label>
-        <input
+        {/* <input
           id="date"
           onChange={(e) => setDate(e.target.value)}
           value={date}
+        /> */}
+        <DatePicker
+          id="date"
+          onChange={(date) => setDate(date)}
+          selected={date}
+          dateFormat="dd/MM/yyyy"
         />
       </div>
 
