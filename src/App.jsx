@@ -1,19 +1,24 @@
+import { lazy, Suspense } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
-import HomePage from "./pages/HomePage";
-import Pricing from "./pages/Pricing";
-import Product from "./pages/Product";
-import Login from "./pages/Login";
-import AppLayout from "./pages/AppLayout";
-import PageNotFound from "./pages/PageNotFound";
+import { CitiesProvider } from "./contexts/CityContext";
+import { AuthProvider } from "./contexts/FakeAuthContext";
+
 import CityList from "./components/CityList";
 import CountryList from "./components/CountryList";
 import City from "./components/City";
 import Form from "./components/Form";
 
-import { CitiesProvider } from "./contexts/CityContext";
-import { AuthProvider } from "./contexts/FakeAuthContext";
+import SpinnerFullPage from "./components/SpinnerFullPage";
+
 import ProtectedRoutes from "./pages/ProtectedRoutes";
+
+const HomePage = lazy(() => import("./pages/Homepage"));
+const Pricing = lazy(() => import("./pages/Pricing"));
+const Product = lazy(() => import("./pages/Product"));
+const Login = lazy(() => import("./pages/Login"));
+const AppLayout = lazy(() => import("./pages/AppLayout"));
+const PageNotFound = lazy(() => import("./pages/PageNotFound"));
 
 function App() {
   return (
@@ -21,15 +26,45 @@ function App() {
       <CitiesProvider>
         <BrowserRouter>
           <Routes>
-            <Route index element={<HomePage />} />
-            <Route path="product" element={<Product />} />
-            <Route path="pricing" element={<Pricing />} />
-            <Route path="login" element={<Login />} />
+            <Route
+              index
+              element={
+                <Suspense fallback={<SpinnerFullPage />}>
+                  <HomePage />
+                </Suspense>
+              }
+            />
+            <Route
+              path="product"
+              element={
+                <Suspense fallback={<SpinnerFullPage />}>
+                  <Product />
+                </Suspense>
+              }
+            />
+            <Route
+              path="pricing"
+              element={
+                <Suspense fallback={<SpinnerFullPage />}>
+                  <Pricing />
+                </Suspense>
+              }
+            />
+            <Route
+              path="login"
+              element={
+                <Suspense fallback={<SpinnerFullPage />}>
+                  <Login />
+                </Suspense>
+              }
+            />
             <Route
               path="app"
               element={
                 <ProtectedRoutes>
-                  <AppLayout />
+                  <Suspense fallback={<SpinnerFullPage />}>
+                    <AppLayout />
+                  </Suspense>
                 </ProtectedRoutes>
               }
             >
@@ -39,7 +74,14 @@ function App() {
               <Route path="countries" element={<CountryList />} />
               <Route path="form" element={<Form />} />
             </Route>
-            <Route path="*" element={<PageNotFound />} />
+            <Route
+              path="*"
+              element={
+                <Suspense fallback={<SpinnerFullPage />}>
+                  <PageNotFound />
+                </Suspense>
+              }
+            />
           </Routes>
         </BrowserRouter>
       </CitiesProvider>
