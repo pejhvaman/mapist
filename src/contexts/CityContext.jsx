@@ -1,5 +1,11 @@
 /* eslint-disable react/prop-types */
-import { createContext, useContext, useEffect, useReducer } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useReducer,
+} from "react";
 
 const BASE_URL = "http://localhost:5000";
 
@@ -65,22 +71,25 @@ function CitiesProvider({ children }) {
     fetchCities();
   }, []);
 
-  const getCity = async function (cityId) {
-    // When we select the same city, there is no need to get it again!
-    if (cityId === currentCity.id) return;
-    dispatch({ type: "loading" });
-    try {
-      const res = await fetch(`${BASE_URL}/cities/${cityId}`);
-      if (!res.ok) throw new Error("something went wrong😡");
-      const data = await res.json();
-      dispatch({ type: "city/loaded", payload: data });
-    } catch (err) {
-      dispatch({
-        type: "rejected",
-        payload: "An error accured while loading city!" + err.message,
-      });
-    }
-  };
+  const getCity = useCallback(
+    async function (cityId) {
+      // When we select the same city, there is no need to get it again!
+      if (cityId === currentCity.id) return;
+      dispatch({ type: "loading" });
+      try {
+        const res = await fetch(`${BASE_URL}/cities/${cityId}`);
+        if (!res.ok) throw new Error("something went wrong😡");
+        const data = await res.json();
+        dispatch({ type: "city/loaded", payload: data });
+      } catch (err) {
+        dispatch({
+          type: "rejected",
+          payload: "An error accured while loading city!" + err.message,
+        });
+      }
+    },
+    [currentCity.id]
+  );
 
   const createCity = async function (newCity) {
     dispatch({ type: "loading" });
