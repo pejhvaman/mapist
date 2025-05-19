@@ -1,24 +1,56 @@
+# Node modules (dependencies)
+node_modules/
+npm-debug.log
+yarn-error.log
+package-lock.json
+yarn.lock
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Build and cache files
+dist/
+build/
+.cache/
+.vite/
+
+# Editor and OS files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+
 # Logs
-logs
+logs/
 *.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
-lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
-*.local
+# Lint and formatting
+.eslintcache
+.stylelintcache
 
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
-.DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+# Test coverage
+coverage/
+
+# Storybook
+.storybook-out/
+
+# Mac system files
+*.DS_Store
+
+# Linux/macOS system files
+*.swp
+*.swo
+*~
+
+# Project's untracking
+data/

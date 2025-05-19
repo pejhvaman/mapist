@@ -7,7 +7,7 @@ import {
   useReducer,
 } from "react";
 
-const BASE_URL = "http://localhost:5000";
+const API_URL = "https://json-server-api-mapist-production.up.railway.app";
 
 const CitiesContext = createContext();
 
@@ -57,7 +57,7 @@ function CitiesProvider({ children }) {
     async function fetchCities() {
       dispatch({ type: "loading" });
       try {
-        const res = await fetch(`${BASE_URL}/cities`);
+        const res = await fetch(`${API_URL}/cities`);
         if (!res.ok) throw new Error("something went wrong😡");
         const data = await res.json();
         dispatch({ type: "cities/loaded", payload: data });
@@ -77,7 +77,7 @@ function CitiesProvider({ children }) {
       if (cityId === currentCity.id) return;
       dispatch({ type: "loading" });
       try {
-        const res = await fetch(`${BASE_URL}/cities/${cityId}`);
+        const res = await fetch(`${API_URL}/cities/${cityId}`);
         if (!res.ok) throw new Error("something went wrong😡");
         const data = await res.json();
         dispatch({ type: "city/loaded", payload: data });
@@ -94,7 +94,7 @@ function CitiesProvider({ children }) {
   const createCity = async function (newCity) {
     dispatch({ type: "loading" });
     try {
-      const res = await fetch(`${BASE_URL}/cities`, {
+      const res = await fetch(`${API_URL}/cities`, {
         method: "POST",
         body: JSON.stringify(newCity),
         headers: {
@@ -115,7 +115,7 @@ function CitiesProvider({ children }) {
   const deleteCity = async function (id) {
     dispatch({ type: "loading" });
     try {
-      await fetch(`${BASE_URL}/cities/${id}`, {
+      await fetch(`${API_URL}/cities/${id}`, {
         method: "DELETE",
       });
       dispatch({ type: "city/deleted", payload: id });
