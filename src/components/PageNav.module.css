@@ -2,6 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  width: 100%;
 }
 
 .nav ul {
@@ -9,6 +10,11 @@
   display: flex;
   align-items: center;
   gap: 4rem;
+}
+
+.nav a img {
+  flex-shrink: 0;
+  aspect-ratio: 1/1;
 }
 
 .nav a:link,
@@ -31,4 +37,20 @@ a.ctaLink:visited {
   color: var(--color-dark--0);
   padding: 0.8rem 2rem;
   border-radius: 7px;
+}
+
+@media only screen and (max-width: 768px) {
+  .nav ul {
+    gap: 1.2rem;
+  }
+
+  .nav a:link,
+  .nav a:visited {
+    font-size: 1rem;
+  }
+
+  .nav a img {
+    width: 6rem;
+    height: 6rem;
+  }
 }

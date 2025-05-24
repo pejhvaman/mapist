@@ -67,3 +67,10 @@ input:focus {
   padding: 1rem 3rem;
   border-radius: 5px;
 }
+
+@media only screen and (max-width: 768px) {
+  .cta:link,
+  .cta:visited {
+    font-size: 1.2rem;
+  }
+}
