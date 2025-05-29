@@ -1,11 +1,5 @@
 .logo {
-  height: 8rem;
-}
-
-@media only screen and (max-width: 463px) {
-  .logoLink {
-    visibility: hidden;
-  }
+  height: 6rem;
 }
 
 @media only screen and (max-width: 768px) {
