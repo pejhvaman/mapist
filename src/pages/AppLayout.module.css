@@ -5,8 +5,10 @@
   display: flex;
   position: relative;
 }
-@media (max-width: 768px) {
+
+@media only screen and (max-width: 768px) {
   .app {
     padding: 0;
+    flex-direction: column;
   }
 }
