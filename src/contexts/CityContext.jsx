@@ -7,7 +7,7 @@ import {
   useReducer,
 } from "react";
 
-const API_URL = "https://json-server-api-mapist-production.up.railway.app";
+const API_URL = "https://json-server-api-mapist.onrender.com";
 
 const CitiesContext = createContext();
 
