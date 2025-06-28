@@ -1,15 +1,21 @@
 .sidebar {
   background-color: var(--color-dark--1);
-  padding: 2rem 2rem 1rem 2rem;
+  padding: 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
 }
 
 @media (max-width: 768px) {
   .sidebar {
-    max-height: 60%;
-    padding-top: 1.2rem;
+    height: 55%;
+    overflow-y: scroll;
+  }
+
+  .collapsedSidebar {
+    height: 8rem;
+    overflow: hidden;
   }
 }
 

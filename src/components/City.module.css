@@ -1,6 +1,6 @@
 .city {
   padding: 2rem 3rem;
-  max-height: 70%;
+  height: fit-content;
   background-color: var(--color-dark--2);
   border-radius: 7px;
 
