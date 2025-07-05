@@ -19,7 +19,8 @@ import PropTypes from "prop-types";
 
 import styles from "./Map.module.css";
 
-function Map() {
+// eslint-disable-next-line react/prop-types
+function Map({ isCollapsed, handleCollapse }) {
   const { cities } = useCities();
 
   const [mapLat, mapLng] = useUrlPosition();
@@ -71,7 +72,10 @@ function Map() {
           </Marker>
         ))}
         <ChangeCenter position={mapPosition} />
-        <DetectClick />
+        <DetectClick
+          isCollapsed={isCollapsed}
+          handleCollapse={handleCollapse}
+        />
       </MapContainer>
     </div>
   );
@@ -88,10 +92,13 @@ function ChangeCenter({ position }) {
   return null;
 }
 
-function DetectClick() {
+function DetectClick({ isCollapsed, handleCollapse }) {
   const navigate = useNavigate();
   useMapEvents({
-    click: (e) => navigate(`form?lat=${e.latlng.lat}&lng=${e.latlng.lng}`),
+    click: (e) => {
+      if (isCollapsed) handleCollapse();
+      navigate(`form?lat=${e.latlng.lat}&lng=${e.latlng.lng}`);
+    },
   });
 }
 

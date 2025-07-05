@@ -8,7 +8,7 @@ function User() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
 
-  const [isCollapsed, setIsCollapse] = useState(false);
+  const [isCollapsed, setIsCollapse] = useState(true);
 
   function handleLogout() {
     logout();

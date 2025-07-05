@@ -4,18 +4,27 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
   position: relative;
+  transition: all 0.3s;
 }
 
 @media (max-width: 768px) {
   .sidebar {
-    height: 55%;
+    height: fit-content;
     overflow-y: scroll;
   }
 
   .collapsedSidebar {
-    height: 8rem;
+    height: 12rem;
     overflow: hidden;
+  }
+}
+
+@media (min-width: 768px) {
+  .sidebar {
+    width: 36rem;
+    justify-content: flex-start;
   }
 }
 
